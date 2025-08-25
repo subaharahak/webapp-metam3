@@ -1,0 +1,73 @@
+{% extends "base.html" %}
+
+{% block title %}Dashboard - CardCheck Pro{% endblock %}
+
+{% block content %}
+<div class="dashboard-header">
+    <h1>Welcome, {{ user.first_name }}!</h1>
+    <p>Your current plan: 
+        {% if user.is_admin %}
+        <span class="badge badge-admin" style="background: var(--premium-gradient); color: white; padding: 4px 12px; border-radius: 20px; font-size: 12px; font-weight: 600;">Admin 👑</span>
+        {% elif user.is_premium %}
+        <span class="badge badge-premium" style="background: var(--premium-gradient); color: white; padding: 4px 12px; border-radius: 20px; font-size: 12px; font-weight: 600;">Premium</span>
+        {% else %}
+        <span class="badge badge-free" style="background: var(--metallic-gradient); color: var(--chrome-text); padding: 4px 12px; border-radius: 20px; font-size: 12px; font-weight: 600;">Free</span>
+        {% endif %}
+    </p>
+</div>
+
+<div class="stats-grid">
+    <div class="stat-card">
+        <div class="stat-value">24h</div>
+        <div class="stat-label">Uptime</div>
+    </div>
+    <div class="stat-card">
+        <div class="stat-value">99.7%</div>
+        <div class="stat-label">Success Rate</div>
+    </div>
+    <div class="stat-card">
+        <div class="stat-value">0.3s</div>
+        <div class="stat-label">Avg. Response</div>
+    </div>
+</div>
+
+<div class="card">
+    <div class="card-header">
+        <h2 class="card-title"><i class="fas fa-rocket"></i> Quick Actions</h2>
+    </div>
+    <div class="card-body">
+        <div class="actions-grid" style="display: grid; grid-template-columns: repeat(auto-fit, minmax(150px, 1fr)); gap: 16px;">
+            <a href="{{ url_for('check_single') }}" class="action-btn" style="display: flex; flex-direction: column; align-items: center; justify-content: center; padding: 20px; background: var(--chrome-card-bg); border: 1px solid var(--chrome-border); border-radius: 12px; text-decoration: none; color: var(--chrome-text); transition: all 0.2s ease;">
+                <i class="fas fa-credit-card" style="font-size: 24px; margin-bottom: 12px; color: var(--chrome-blue);"></i>
+                <span>Single Check</span>
+            </a>
+            {% if user.is_premium or user.is_admin %}
+            <a href="{{ url_for('check_mass') }}" class="action-btn" style="display: flex; flex-direction: column; align-items: center; justify-content: center; padding: 20px; background: var(--chrome-card-bg); border: 1px solid var(--chrome-border); border-radius: 12px; text-decoration: none; color: var(--chrome-text); transition: all 0.2s ease;">
+                <i class="fas fa-file-alt" style="font-size: 24px; margin-bottom: 12px; color: var(--chrome-blue);"></i>
+                <span>Mass Check</span>
+            </a>
+            {% endif %}
+            <a href="{{ url_for('generate_cards') }}" class="action-btn" style="display: flex; flex-direction: column; align-items: center; justify-content: center; padding: 20px; background: var(--chrome-card-bg); border: 1px solid var(--chrome-border); border-radius: 12px; text-decoration: none; color: var(--chrome-text); transition: all 0.2s ease;">
+                <i class="fas fa-magic" style="font-size: 24px; margin-bottom: 12px; color: var(--chrome-blue);"></i>
+                <span>Generate</span>
+            </a>
+            <a href="{{ url_for('redeem_key') }}" class="action-btn" style="display: flex; flex-direction: column; align-items: center; justify-content: center; padding: 20px; background: var(--chrome-card-bg); border: 1px solid var(--chrome-border); border-radius: 12px; text-decoration: none; color: var(--chrome-text); transition: all 0.2s ease;">
+                <i class="fas fa-gift" style="font-size: 24px; margin-bottom: 12px; color: var(--chrome-blue);"></i>
+                <span>Redeem Key</span>
+            </a>
+        </div>
+    </div>
+</div>
+
+<div class="card">
+    <div class="card-header">
+        <h2 class="card-title"><i class="fas fa-history"></i> Recent Activity</h2>
+    </div>
+    <div class="card-body">
+        <p class="empty-state" style="text-align: center; color: var(--chrome-text-light); padding: 40px 20px;">
+            <i class="fas fa-inbox" style="font-size: 48px; margin-bottom: 16px; opacity: 0.5;"></i><br>
+            No recent activity yet. Start checking cards to see your history here.
+        </p>
+    </div>
+</div>
+{% endblock %}

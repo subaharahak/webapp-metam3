@@ -1,0 +1,109 @@
+{% extends "base.html" %}
+
+{% block title %}Admin Panel - CardCheck Pro{% endblock %}
+
+{% block content %}
+<div class="admin-header">
+    <h1><i class="fas fa-shield-alt"></i> Admin Panel</h1>
+    <p>Manage users, keys, and system settings</p>
+</div>
+
+{% if error %}
+<div class="alert alert-error">
+    <i class="fas fa-exclamation-circle"></i> {{ error }}
+</div>
+{% endif %}
+
+<div class="stats-grid">
+    <div class="stat-card">
+        <div class="stat-value">{{ free_users }}</div>
+        <div class="stat-label">Free Users</div>
+    </div>
+    <div class="stat-card">
+        <div class="stat-value">{{ premium_users }}</div>
+        <div class="stat-label">Premium Users</div>
+    </div>
+    <div class="stat-card">
+        <div class="stat-value">{{ admins_count }}</div>
+        <div class="stat-label">Admins</div>
+    </div>
+</div>
+
+<div class="card">
+    <div class="card-header">
+        <h2 class="card-title"><i class="fas fa-key"></i> Generate Premium Key</h2>
+    </div>
+    <div class="card-body">
+        <form action="{{ url_for('generate_key') }}" method="POST">
+            <div class="form-group">
+                <label class="form-label" for="validity_days">Validity (Days)</label>
+                <input type="number" class="form-input" id="validity_days" name="validity_days" min="1" max="365" value="30" required>
+            </div>
+            
+            <button type="submit" class="btn btn-primary">
+                <i class="fas fa-plus-circle"></i> Generate Key
+            </button>
+        </form>
+    </div>
+</div>
+
+<div class="card">
+    <div class="card-header">
+        <h2 class="card-title"><i class="fas fa-users"></i> Recent Premium Activations</h2>
+    </div>
+    <div class="card-body">
+        {% if recent_premium %}
+        <div class="table-responsive">
+            <table style="width: 100%; border-collapse: collapse;">
+                <thead>
+                    <tr style="border-bottom: 2px solid var(--chrome-border);">
+                        <th style="text-align: left; padding: 12px 8px;">User ID</th>
+                        <th style="text-align: left; padding: 12px 8px;">Name</th>
+                        <th style="text-align: left; padding: 12px 8px;">Expiry Date</th>
+                    </tr>
+                </thead>
+                <tbody>
+                    {% for user in recent_premium %}
+                    <tr style="border-bottom: 1px solid var(--chrome-border);">
+                        <td style="padding: 12px 8px;">{{ user.user_id }}</td>
+                        <td style="padding: 12px 8px;">{{ user.first_name }}</td>
+                        <td style="padding: 12px 8px;">{{ user.subscription_expiry }}</td>
+                    </tr>
+                    {% endfor %}
+                </tbody>
+            </table>
+        </div>
+        {% else %}
+        <p class="empty-state" style="text-align: center; color: var(--chrome-text-light); padding: 20px;">
+            No premium activations yet.
+        </p>
+        {% endif %}
+    </div>
+</div>
+
+<div class="card">
+    <div class="card-header">
+        <h2 class="card-title"><i class="fas fa-tools"></i> Admin Tools</h2>
+    </div>
+    <div class="card-body">
+        <div class="admin-actions" style="display: grid; grid-template-columns: repeat(auto-fit, minmax(200px, 1fr)); gap: 16px;">
+            <a href="#" class="admin-action-btn" style="display: flex; flex-direction: column; align-items: center; justify-content: center; padding: 20px; background: var(--chrome-card-bg); border: 1px solid var(--chrome-border); border-radius: 12px; text-decoration: none; color: var(--chrome-text); text-align: center;">
+                <i class="fas fa-user-plus" style="font-size: 24px; margin-bottom: 12px; color: var(--chrome-blue);"></i>
+                <span>Add Admin</span>
+            </a>
+            <a href="#" class="admin-action-btn" style="display: flex; flex-direction: column; align-items: center; justify-content: center; padding: 20px; background: var(--chrome-card-bg); border: 1px solid var(--chrome-border); border-radius: 12px; text-decoration: none; color: var(--chrome-text); text-align: center;">
+                <i class="fas fa-user-slash" style="font-size: 24px; margin-bottom: 12px; color: var(--chrome-blue);"></i>
+                <span>Remove Admin</span>
+            </a>
+            <a href="#" class="admin-action-btn" style="display: flex; flex-direction: column; align-items: center; justify-content: center; padding: 20px; background: var(--chrome-card-bg); border: 1px solid var(--chrome-border); border-radius: 12px; text-decoration: none; color: var(--chrome-text); text-align: center;">
+                <i class="fas fa-ban" style="font-size: 24px; margin-bottom: 12px; color: var(--chrome-blue);"></i>
+                <span>Ban User</span>
+            </a>
+            <a href="#" class="admin-action-btn" style="display: flex; flex-direction: column; align-items: center; justify-content: center; padding: 20px; background: var(--chrome-card-bg); border: 1px solid var(--chrome-border); border-radius: 12px; text-decoration: none; color: var(--chrome-text); text-align: center;">
+                <i class="fas fa-cog" style="font-size: 24px; margin-bottom: 12px; color: var(--chrome-blue);"></i>
+                <span>System Settings</span>
+            </a>
+        </div>
+    </div>
+</div>
+{% endblock %}

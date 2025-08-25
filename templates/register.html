@@ -1,0 +1,36 @@
+{% extends "base.html" %}
+
+{% block title %}Register - CardCheck Pro{% endblock %}
+
+{% block content %}
+<div class="card">
+    <div class="card-header">
+        <h2 class="card-title"><i class="fas fa-user-plus"></i> Complete Registration</h2>
+    </div>
+    <div class="card-body">
+        {% if error %}
+        <div class="alert alert-error">
+            <i class="fas fa-exclamation-circle"></i> {{ error }}
+        </div>
+        {% endif %}
+        
+        <p>Welcome to CardCheck Pro! To complete your registration, please click the button below.</p>
+        
+        <form action="{{ url_for('register') }}" method="POST">
+            <button type="submit" class="btn btn-primary" style="width: 100%; margin-top: 20px;">
+                <i class="fas fa-check-circle"></i> Complete Registration
+            </button>
+        </form>
+        
+        <div class="features-list" style="margin-top: 30px;">
+            <h3 style="margin-bottom: 15px;">What you get with CardCheck Pro:</h3>
+            <ul style="list-style: none; padding-left: 0;">
+                <li style="margin-bottom: 10px;"><i class="fas fa-check" style="color: #34a853; margin-right: 10px;"></i> Free card checking (limited)</li>
+                <li style="margin-bottom: 10px;"><i class="fas fa-check" style="color: #34a853; margin-right: 10px;"></i> Secure and reliable service</li>
+                <li style="margin-bottom: 10px;"><i class="fas fa-check" style="color: #34a853; margin-right: 10px;"></i> Premium upgrade options</li>
+                <li style="margin-bottom: 10px;"><i class="fas fa-check" style="color: #34a853; margin-right: 10px;"></i> 24/7 support</li>
+            </ul>
+        </div>
+    </div>
+</div>
+{% endblock %}

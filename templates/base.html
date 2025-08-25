@@ -1,0 +1,105 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>{% block title %}CardCheck Pro{% endblock %}</title>
+    <link rel="stylesheet" href="{{ url_for('static', filename='css/style.css') }}">
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+</head>
+<body>
+    <div class="app-container">
+        <header class="chrome-header">
+            <div class="header-left">
+                <div class="window-controls">
+                    <div class="control close"></div>
+                    <div class="control minimize"></div>
+                    <div class="control maximize"></div>
+                </div>
+                <h1 class="logo">CardCheck <span class="pro-badge">Pro</span></h1>
+            </div>
+            <div class="header-center">
+                <div class="address-bar">
+                    <i class="fas fa-lock"></i>
+                    <span>secure.cardcheckpro.com</span>
+                </div>
+            </div>
+            <div class="header-right">
+                {% if session.user_id %}
+                <div class="user-menu">
+                    <span class="user-name">{{ session.get('first_name', 'User') }}</span>
+                    <div class="user-avatar">
+                        <i class="fas fa-user"></i>
+                    </div>
+                    <div class="dropdown-menu">
+                        <a href="{{ url_for('dashboard') }}"><i class="fas fa-tachometer-alt"></i> Dashboard</a>
+                        <a href="{{ url_for('subscription') }}"><i class="fas fa-crown"></i> Subscription</a>
+                        <a href="{{ url_for('logout') }}"><i class="fas fa-sign-out-alt"></i> Logout</a>
+                    </div>
+                </div>
+                {% else %}
+                <a href="{{ url_for('index') }}" class="login-btn">Login</a>
+                {% endif %}
+            </div>
+        </header>
+
+        <nav class="chrome-nav">
+            <div class="nav-items">
+                <a href="{{ url_for('dashboard') }}" class="nav-item {% if request.endpoint == 'dashboard' %}active{% endif %}">
+                    <i class="fas fa-home"></i>
+                    <span>Dashboard</span>
+                </a>
+                <a href="{{ url_for('check_single') }}" class="nav-item {% if request.endpoint == 'check_single' %}active{% endif %}">
+                    <i class="fas fa-credit-card"></i>
+                    <span>Single Check</span>
+                </a>
+                <a href="{{ url_for('check_mass') }}" class="nav-item {% if request.endpoint == 'check_mass' %}active{% endif %}">
+                    <i class="fas fa-file-alt"></i>
+                    <span>Mass Check</span>
+                </a>
+                <a href="{{ url_for('generate_cards') }}" class="nav-item {% if request.endpoint == 'generate_cards' %}active{% endif %}">
+                    <i class="fas fa-magic"></i>
+                    <span>Generate</span>
+                </a>
+                <a href="{{ url_for('redeem_key') }}" class="nav-item {% if request.endpoint == 'redeem_key' %}active{% endif %}">
+                    <i class="fas fa-gift"></i>
+                    <span>Redeem</span>
+                </a>
+                {% if session.user_id and is_admin(session.user_id) %}
+                <a href="{{ url_for('admin_panel') }}" class="nav-item {% if request.endpoint == 'admin_panel' %}active{% endif %}">
+                    <i class="fas fa-shield-alt"></i>
+                    <span>Admin</span>
+                </a>
+                {% endif %}
+            </div>
+        </nav>
+
+        <main class="main-content">
+            {% with messages = get_flashed_messages(with_categories=true) %}
+                {% if messages %}
+                    {% for category, message in messages %}
+                        <div class="alert alert-{{ category }}">
+                            {{ message }}
+                        </div>
+                    {% endfor %}
+                {% endif %}
+            {% endwith %}
+
+            {% block content %}{% endblock %}
+        </main>
+
+        <footer class="chrome-footer">
+            <div class="footer-content">
+                <p>&copy; 2023 CardCheck Pro. All rights reserved.</p>
+                <div class="footer-links">
+                    <a href="#"><i class="fab fa-telegram"></i> Telegram</a>
+                    <a href="#"><i class="fas fa-question-circle"></i> Support</a>
+                </div>
+            </div>
+        </footer>
+    </div>
+
+    <script src="{{ url_for('static', filename='js/script.js') }}"></script>
+</body>
+</html>

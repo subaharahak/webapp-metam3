@@ -1,0 +1,126 @@
+{% extends "base.html" %}
+
+{% block title %}Subscription - CardCheck Pro{% endblock %}
+
+{% block content %}
+<div class="card">
+    <div class="card-header">
+        <h2 class="card-title"><i class="fas fa-crown"></i> Your Subscription</h2>
+    </div>
+<div class="card-body">
+    <div class="subscription-status" style="text-align: center; padding: 20px;">
+        <div class="status-badge 
+            {% if 'Admin' in status %} admin-style 
+            {% elif 'Premium' in status %} premium-style 
+            {% else %} default-style 
+            {% endif %}">
+            {{ status }}
+        </div>
+    </div>
+</div>
+            
+            <p style="margin-bottom: 10px;">
+                <strong>Expiry Date:</strong> {{ expiry }}
+            </p>
+            
+            {% if 'Free' in status %}
+            <p class="form-hint">Upgrade to premium for unlimited access to all features</p>
+            {% endif %}
+        </div>
+    </div>
+</div>
+
+<div class="card">
+    <div class="card-header">
+        <h2 class="card-title"><i class="fas fa-medal"></i> Premium Plans</h2>
+    </div>
+    <div class="card-body">
+        <div class="pricing-grid" style="display: grid; grid-template-columns: repeat(auto-fit, minmax(280px, 1fr)); gap: 20px;">
+            <div class="pricing-tier" style="border: 1px solid var(--chrome-border); border-radius: 12px; padding: 25px; text-align: center;">
+                <h3>7 Days</h3>
+                <div class="price" style="font-size: 32px; font-weight: 700; margin: 20px 0; background: var(--premium-gradient); -webkit-background-clip: text; background-clip: text; color: transparent;">$3</div>
+                <ul style="list-style: none; padding-left: 0; margin-bottom: 25px;">
+                    <li style="margin-bottom: 12px; display: flex; align-items: center; justify-content: center;">
+                        <i class="fas fa-check" style="color: #34a853; margin-right: 8px;"></i>
+                        <span>Unlimited Card Checks</span>
+                    </li>
+                    <li style="margin-bottom: 12px; display: flex; align-items: center; justify-content: center;">
+                        <i class="fas fa-check" style="color: #34a853; margin-right: 8px;"></i>
+                        <span>Mass Checking</span>
+                    </li>
+                    <li style="margin-bottom: 12px; display: flex; align-items: center; justify-content: center;">
+                        <i class="fas fa-check" style="color: #34a853; margin-right: 8px;"></i>
+                        <span>Priority Processing</span>
+                    </li>
+                    <li style="margin-bottom: 12px; display: flex; align-items: center; justify-content: center;">
+                        <i class="fas fa-check" style="color: #34a853; margin-right: 8px;"></i>
+                        <span>7 Day Access</span>
+                    </li>
+                </ul>
+                <button class="btn btn-premium" style="width: 100%;" disabled>
+                    Contact @mhitzxg to Purchase
+                </button>
+            </div>
+            
+            <div class="pricing-tier" style="border: 2px solid var(--chrome-blue); border-radius: 12px; padding: 25px; text-align: center; position: relative;">
+                <div style="position: absolute; top: -12px; left: 50%; transform: translateX(-50%); background: var(--premium-gradient); color: white; padding: 4px 12px; border-radius: 20px; font-size: 12px; font-weight: 600;">
+                    MOST POPULAR
+                </div>
+                <h3>30 Days</h3>
+                <div class="price" style="font-size: 32px; font-weight: 700; margin: 20px 0; background: var(--premium-gradient); -webkit-background-clip: text; background-clip: text; color: transparent;">$10</div>
+                <ul style="list-style: none; padding-left: 0; margin-bottom: 25px;">
+                    <li style="margin-bottom: 12px; display: flex; align-items: center; justify-content: center;">
+                        <i class="fas fa-check" style="color: #34a853; margin-right: 8px;"></i>
+                        <span>Unlimited Card Checks</span>
+                    </li>
+                    <li style="margin-bottom: 12px; display: flex; align-items: center; justify-content: center;">
+                        <i class="fas fa-check" style="color: #34a853; margin-right: 8px;"></i>
+                        <span>Mass Checking</span>
+                    </li>
+                    <li style="margin-bottom: 12px; display: flex; align-items: center; justify-content: center;">
+                        <i class="fas fa-check" style="color: #34a853; margin-right: 8px;"></i>
+                        <span>Priority Processing</span>
+                    </li>
+                    <li style="margin-bottom: 12px; display: flex; align-items: center; justify-content: center;">
+                        <i class="fas fa-check" style="color: #34a853; margin-right: 8px;"></i>
+                        <span>30 Day Access</span>
+                    </li>
+                    <li style="margin-bottom: 12px; display: flex; align-items: center; justify-content: center;">
+                        <i class="fas fa-check" style="color: #34a853; margin-right: 8px;"></i>
+                        <span>Priority Support</span>
+                    </li>
+                </ul>
+                <button class="btn btn-premium" style="width: 100%;" disabled>
+                    Contact @mhitzxg to Purchase
+                </button>
+            </div>
+        </div>
+    </div>
+</div>
+
+<div class="card">
+    <div class="card-header">
+        <h2 class="card-title"><i class="fas fa-gift"></i> Redeem Premium Key</h2>
+    </div>
+    <div class="card-body">
+        <p>If you already have a premium key, you can redeem it to activate your subscription:</p>
+        <a href="{{ url_for('redeem_key') }}" class="btn btn-primary">
+            <i class="fas fa-key"></i> Redeem Key
+        </a>
+    </div>
+</div>
+
+<div class="card">
+    <div class="card-header">
+        <h2 class="card-title"><i class="fas fa-question-circle"></i> Need Help?</h2>
+    </div>
+    <div class="card-body">
+        <p>If you have any questions about our subscription plans or need assistance with payment, please contact us on Telegram:</p>
+        <div style="text-align: center; margin-top: 20px;">
+            <a href="https://t.me/mhitzxg" class="btn btn-secondary" target="_blank">
+                <i class="fab fa-telegram"></i> Contact @mhitzxg
+            </a>
+        </div>
+    </div>
+</div>
+{% endblock %}

@@ -1,0 +1,97 @@
+{% extends "base.html" %}
+
+{% block title %}Redeem Key - CardCheck Pro{% endblock %}
+
+{% block content %}
+<div class="card">
+    <div class="card-header">
+        <h2 class="card-title"><i class="fas fa-gift"></i> Redeem Premium Key</h2>
+    </div>
+    <div class="card-body">
+        {% if error %}
+        <div class="alert alert-error">
+            <i class="fas fa-exclamation-circle"></i> {{ error }}
+        </div>
+        {% endif %}
+        
+        {% if success %}
+        <div class="alert alert-success">
+            <i class="fas fa-check-circle"></i> {{ success }}
+        </div>
+        {% endif %}
+        
+        <form action="{{ url_for('redeem_key') }}" method="POST">
+            <div class="form-group">
+                <label class="form-label" for="key">Premium Key</label>
+                <input type="text" class="form-input" id="key" name="key" placeholder="Enter your premium key" required>
+                <small class="form-hint">Enter the premium key you received to activate your subscription.</small>
+            </div>
+            
+            <button type="submit" class="btn btn-premium">
+                <i class="fas fa-key"></i> Redeem Key
+            </button>
+        </form>
+        
+        <div class="premium-benefits" style="margin-top: 24px;">
+            <h3 style="margin-bottom: 12px;">Premium Benefits</h3>
+            <ul class="benefits-list" style="list-style: none; padding-left: 0;">
+                <li style="margin-bottom: 10px; display: flex; align-items: center;">
+                    <i class="fas fa-check-circle" style="color: #34a853; margin-right: 10px;"></i>
+                    <span>Unlimited card checking</span>
+                </li>
+                <li style="margin-bottom: 10px; display: flex; align-items: center;">
+                    <i class="fas fa-check-circle" style="color: #34a853; margin-right: 10px;"></i>
+                    <span>Mass card checking</span>
+                </li>
+                <li style="margin-bottom: 10px; display: flex; align-items: center;">
+                    <i class="fas fa-check-circle" style="color: #34a853; margin-right: 10px;"></i>
+                    <span>Priority processing</span>
+                </li>
+                <li style="margin-bottom: 10px; display: flex; align-items: center;">
+                    <i class="fas fa-check-circle" style="color: #34a853; margin-right: 10px;"></i>
+                    <span>Higher success rates</span>
+                </li>
+                <li style="margin-bottom: 10px; display: flex; align-items: center;">
+                    <i class="fas fa-check-circle" style="color: #34a853; margin-right: 10px;"></i>
+                    <span>Exclusive card generation</span>
+                </li>
+            </ul>
+        </div>
+    </div>
+</div>
+
+<div class="card">
+    <div class="card-header">
+        <h2 class="card-title"><i class="fas fa-crown"></i> Premium Plans</h2>
+    </div>
+    <div class="card-body">
+        <div class="pricing-grid" style="display: grid; grid-template-columns: repeat(auto-fit, minmax(250px, 1fr)); gap: 20px;">
+            <div class="pricing-tier" style="border: 1px solid var(--chrome-border); border-radius: 12px; padding: 20px; text-align: center;">
+                <h3>7 Days</h3>
+                <div class="price" style="font-size: 24px; font-weight: 700; margin: 15px 0; background: var(--premium-gradient); -webkit-background-clip: text; background-clip: text; color: transparent;">$3</div>
+                <ul style="list-style: none; padding-left: 0; margin-bottom: 20px;">
+                    <li style="margin-bottom: 8px;">All Premium Features</li>
+                    <li style="margin-bottom: 8px;">7 Day Access</li>
+                    <li style="margin-bottom: 8px;">Priority Support</li>
+                </ul>
+                <button class="btn btn-secondary" style="width: 100%;" disabled>
+                    Contact @mhitzxg to Purchase
+                </button>
+            </div>
+            
+            <div class="pricing-tier" style="border: 1px solid var(--chrome-border); border-radius: 12px; padding: 20px; text-align: center; border: 2px solid var(--chrome-blue);">
+                <h3>30 Days</h3>
+                <div class="price" style="font-size: 24px; font-weight: 700; margin: 15px 0; background: var(--premium-gradient); -webkit-background-clip: text; background-clip: text; color: transparent;">$10</div>
+                <ul style="list-style: none; padding-left: 0; margin-bottom: 20px;">
+                    <li style="margin-bottom: 8px;">All Premium Features</li>
+                    <li style="margin-bottom: 8px;">30 Day Access</li>
+                    <li style="margin-bottom: 8px;">Priority Support</li>
+                </ul>
+                <button class="btn btn-secondary" style="width: 100%;" disabled>
+                    Contact @mhitzxg to Purchase
+                </button>
+            </div>
+        </div>
+    </div>
+</div>
+{% endblock %}

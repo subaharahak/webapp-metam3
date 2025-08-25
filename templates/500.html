@@ -1,0 +1,22 @@
+{% extends "base.html" %}
+
+{% block title %}Server Error - CardCheck Pro{% endblock %}
+
+{% block content %}
+<div class="card">
+    <div class="card-header">
+        <h2 class="card-title"><i class="fas fa-server"></i> 500 - Server Error</h2>
+    </div>
+    <div class="card-body" style="text-align: center; padding: 40px 20px;">
+        <i class="fas fa-tools" style="font-size: 64px; color: var(--chrome-text-light); margin-bottom: 20px;"></i>
+        <h3>Something went wrong on our end.</h3>
+        <p>Our team has been notified and is working to fix the issue.</p>
+        <a href="{{ url_for('dashboard') }}" class="btn btn-primary">
+            <i class="fas fa-home"></i> Go to Dashboard
+        </a>
+        <a href="javascript:location.reload()" class="btn btn-secondary">
+            <i class="fas fa-redo"></i> Try Again
+        </a>
+    </div>
+</div>
+{% endblock %}
